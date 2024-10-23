@@ -1,0 +1,10 @@
+﻿I'm sorry, but errors were detected in your script. Please correct the
+errors listed below, and try again.
+
+
+File "game/script.rpy", line 5: expected '=' not found.
+    define prof
+               ^
+
+Ren'Py Version: Ren'Py 8.3.3.24101701+nightly
+Mon Oct 21 22:02:06 2024
