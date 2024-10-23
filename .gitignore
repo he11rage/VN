@@ -1,6 +1,6 @@
 .vscode/
-.log.txt
-.errors.txt
-.traceback.txt
+log.txt
+errors.txt
+traceback.txt
 /game/saves
 /game/cache
