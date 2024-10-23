@@ -1,11 +1,16 @@
+# Конфигурация VS Code
 .vscode/
+
+# Ren'Py
+*.rpyc
+*.rpymc
+*.rpa
+/game/saves
+/game/cache
 log.txt
 errors.txt
 traceback.txt
-/game/saves
-/game/cache
-.rpyk
-.rpa
-.rpymc
-.pyc
-.pyo
+
+# Python
+*.pyc
+__pycache__/
