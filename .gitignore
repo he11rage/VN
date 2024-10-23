@@ -4,3 +4,8 @@ errors.txt
 traceback.txt
 /game/saves
 /game/cache
+.rpyk
+.rpa
+.rpymc
+.pyc
+.pyo
