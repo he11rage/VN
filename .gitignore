@@ -1,5 +1,6 @@
 # Конфигурация VS Code
 .vscode/
+/game/renpy_warp_1.27.0_c92d07e7.rpe.py
 
 # Ren'Py
 *.rpyc
