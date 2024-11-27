@@ -212,7 +212,7 @@ label Chapter_3:
 
     hide prof normal
 
-    show vald normal at left with fade
+    show vald normal at left with move
 
     vald normal "Геймдизайнер — это тот, кто создаёт концепцию игры. Мы придумываем миры, механики, правила, персонажей, историю."
 
@@ -298,13 +298,13 @@ label Chapter_4:
 
     'Франц поднял глаза.'
 
-    show franz at center with dissolve
+    show franz interested at center with dissolve
 
-    franz "Здравствуйте."
+    franz interested "Здравствуйте."
     
     show aly confusion at right with dissolve
 
-    aly "Здравствуйте."
+    aly confusion "Здравствуйте."
 
     hide prof normal
 
@@ -312,7 +312,7 @@ label Chapter_4:
 
     show franz confident at left with move
 
-    franz smile "Интересуешься программированием? Что именно привлекает?"
+    franz confident "Интересуешься программированием? Что именно привлекает?"
 
     aly thinking "Хочу узнать больше о том, чем вы занимаетесь."
 
@@ -322,17 +322,17 @@ label Chapter_4:
 
     aly thinking "А в чём разница между фронтендом и бэкендом?"
 
-    franz normal "Фронтенд — это то, что видит пользователь: интерфейс, дизайн, взаимодействие с элементами на странице. Здесь используются языки HTML, CSS, JavaScript и различные фреймворки, такие как React или Angular."
+    franz focused "Фронтенд — это то, что видит пользователь: интерфейс, дизайн, взаимодействие с элементами на странице. Здесь используются языки HTML, CSS, JavaScript и различные фреймворки, такие как React или Angular."
 
     'Он показал ей на экране код страницы и открыл браузер с видом этой страницы.'
 
-    franz normal "Бэкенд же отвечает за обработку данных, работу с базами данных, бизнес-логику приложения. Для этого используются языки, такие как Python, Java, PHP, а также базы данных — MySQL, PostgreSQL, MongoDB."
+    franz focused "Бэкенд же отвечает за обработку данных, работу с базами данных, бизнес-логику приложения. Для этого используются языки, такие как Python, Java, PHP, а также базы данных — MySQL, PostgreSQL, MongoDB."
 
     'Он переключился на другой экран, где был написан серверный код.'
 
     aly happy "Получается, вы можете создавать полное приложение от начала до конца?"
 
-    franz smile "Именно. Это позволяет лучше понимать всю систему, быстро вносить изменения и оптимизировать работу."
+    franz interested "Именно. Это позволяет лучше понимать всю систему, быстро вносить изменения и оптимизировать работу."
 
     aly thinking "А какие навыки нужны для этого?"
 
@@ -340,7 +340,7 @@ label Chapter_4:
 
     aly normal "Это звучит сложно, но увлекательно."
 
-    franz normal "Хочешь попробовать написать небольшой код?"
+    franz interested "Хочешь попробовать написать небольшой код?"
 
     aly happy "Да, с удовольствием!"
 
@@ -354,11 +354,11 @@ label Chapter_4:
 
     show franz normal at left
 
-    show aly happy at right
+    show aly normal at right
 
     aly happy "Это удивительно! Столько возможностей, и всё взаимосвязано. Я чувствую, как оживает то, что я создаю."
 
-    franz smile "Отлично! Ты быстро учишься. Видишь, как фронтенд и бэкенд работают вместе?"
+    franz interested "Отлично! Ты быстро учишься. Видишь, как фронтенд и бэкенд работают вместе?"
 
     aly happy "Да, спасибо большое! Это очень интересно."
 
@@ -387,11 +387,13 @@ label Chapter_5:
 
     'За столом с ноутбуком сидела девушка с тёплой улыбкой. '
     
-    hide prof normal
-
-    show vivi normal at left with fade
+    show vivi normal at center with fade
 
     vivi happy "Привет! Ты, наверное, Аля?"
+
+    hide prof normal
+
+    show vivi normal at left with move
 
     aly confusion "Да. Здравствуйте. У вас здесь так красиво!"
 
