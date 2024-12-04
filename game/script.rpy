@@ -246,6 +246,48 @@ label Chapter_3:
 
     'Она начала играть.'
 
+    screen hacking_game:
+    # Основное изображение (фон) - заглушка
+        window:
+            xalign 0.5
+            yalign 0.5
+            background Solid("#00ff00")  # Зелёная заглушка для фона
+            xsize 1920  # Размеры окна (фона)
+            ysize 1080
+    
+    # Отображение фрагментов - заглушки
+        vbox:
+            spacing 10  # Расстояние между фрагментами
+            xalign 0.5  # Центрируем по X
+            yalign 0.5  # Центрируем по Y
+            grid 2 4:  # Создаём сетку с 2 колонками и 4 строками
+                for i in range(8):  # 8 плиток (по 2 колонки)
+                    # Определяем цвет в зависимости от выбранности
+                    $ fragment_color = "#ff0000" if not globals().get("fragment_selected_%d" % i, False) else "#ff9900"
+                    imagebutton:
+                        idle Solid(fragment_color)  # Цвет зависит от переменной
+                        hover Solid("#ffcccc")  # Светло-красный при наведении
+                        xsize 100  # Размер фрагмента
+                        ysize 50   # Размер фрагмента
+                        action ToggleVariable("fragment_selected_%d" % i)  # Переключение состояния выбранности плитки
+
+
+    init python:
+        framgents = [
+            {"image": "fragment1.png", "image_hover": "fragment1_hover.png"},
+            {"image": "fragment2.png", "image_hover": "fragment2_hover.png"},
+            {"image": "fragment3.png", "image_hover": "fragment3_hover.png"}
+        ]
+        for i in range(8):
+            globals()["fragment_selected_%d" % i] = False
+
+
+    ##label start_hacking_game:
+    ##   show screen hacking_game
+    ##    "тип игра что-то там, заглушечка должна отображаться"
+        
+
+
     scene bg officeworkplace with fade
     show vald normal at left
     show aly normal at right
