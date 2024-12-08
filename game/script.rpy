@@ -363,7 +363,7 @@ label Chapter_3:
 
     'Она начала играть.'
 
-    jump start_hacking_game
+    ##jump start_hacking_game
 
     scene bg officeworkplace with fade
     show vald normal at left
