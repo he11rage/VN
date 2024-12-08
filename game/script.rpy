@@ -251,7 +251,7 @@ label Chapter_2:
 
     Столько вопросов, но теперь есть надежда. 
     '''
-    scene bg officeenter with fade
+    scene bg officecenter with fade
 
     show prof normal at left with dissolve
 
