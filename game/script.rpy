@@ -11,6 +11,7 @@ define franz = Character('Франц', color="#f631ba", image="franz")
 define vivi = Character('Вивиан', color="#26781c", image="vivi")
 define voice = Character('Голос из динамика', color="#aa1414")
 define android  = Character('Андроид', color="#14a1da")
+image successhack = Movie(play="images/successhack.webm", size=(1920,1080), loop=False, xalign=0.10, yalign=0.10)
 
 
 init python:
@@ -97,13 +98,85 @@ screen hacking_game:
 
 label hacking_game_success:
     hide screen hacking_game
-    "Вау у тя получилось вот это ты крутышка"
-    return
+    scene bg successhack
+    show successhack
+
+    "Фух, вроде получилось"
+
+    scene bg secret room with fade
+
+    show aly confusion at left
+
+    show android at center
+    
+    aly normal "У меня нет пропуска... Я была с Профессором, но он ушёл..."
+
+    show android at right with move
+
+    play sound "music/sounds/opendoor2.mp3"
+
+    'В этот момент дверь внезапно открылась, и в комнату вбежали сотрудники безопасности вместе с Профессором.'
+
+    show prof serious with dissolve
+
+    prof alarm "Аля, быстрее за мной! Нам нужно добраться до панели управления, чтобы отключить протокол безопасности"
+
+    show prof serious with move
+
+    prof serious "Агх, автоматические системы заблокированны, придется делать всё в ручную"
+
+    prof serious "Аля, помоги мне"
+    
+    aly normal "Да, сейчас!"
+    
+    with fade
+
+    'Андроид остановился, его глаза потухли.'
+    hide android
+
+    show aly scary with dissolve
+
+    aly "Профессор! Я так испугалась..."
+
+    prof alarm "Извини, Аля. Ты в порядке?"
+
+    aly thinking "Да, кажется, всё хорошо. Что это за место?"
+
+    prof serious "Пойдём, я всё объясню."
+
+    scene bg corridor with fade
+    'Они вышли из помещения, и дверь снова закрылась за ними. Они остановились у большого окна, из которого открывался вид на город.'
+    
+    show aly normal at left with dissolve
+
+    show prof normal at right with dissolve
+    
+    aly thinking "Профессор, это был... робот? Настоящий андроид?"
+
+    prof normal "Да. Ты попала в наш самый секретный отдел. Проект 'Искра' — это разработка искусственного интеллекта нового поколения."
+
+    aly happy "Невероятно! Он выглядит как человек! И говорит, и двигается..."
+
+    prof normal "Мы стремимся создать ИИ, способный не только выполнять команды, но и думать, учиться, чувствовать."
+
+    aly happy "Это потрясающе. Но почему такая секретность?"
+
+    prof serious "Проект очень важен и потенциально опасен, если попадёт не в те руки. Поэтому мы тщательно охраняем его."
+
+    aly confusion "Понимаю. Извините, что вошла без разрешения."
+
+    prof normal "Всё в порядке. Главное, что ты не пострадала. Но, пожалуйста, никому об этом не рассказывай."
+
+    aly normal "Обещаю. Ваш секрет — в надёжных руках."
+    
+    jump Chapter_7
+
     
 
 label hacking_game_failure:
     hide screen hacking_game
-    "Ниче не вышло, ещё один трай?"
+    scene bg failedhack
+    "Неудачная попытка взлома. Хотите попробовать ещё раз?"
     menu:
         "Да":
             jump start_hacking_game
@@ -362,8 +435,6 @@ label Chapter_3:
     aly happy "С удовольствием!"
 
     'Она начала играть.'
-
-    ##jump start_hacking_game
 
     scene bg officeworkplace with fade
     show vald normal at left
@@ -686,68 +757,8 @@ label Chapter_6:
 
     android "Пожалуйста, предъявите удостоверение личности для проверки."
 
-    aly normal "У меня нет пропуска... Я была с Профессором, но он ушёл..."
+    jump start_hacking_game
 
-    show android at right with move
-
-    play sound "music/sounds/opendoor2.mp3"
-
-    'В этот момент дверь внезапно открылась, и в комнату вбежали сотрудники безопасности вместе с Профессором.'
-
-    show prof serious with dissolve
-
-    prof alarm "Аля, быстрее за мной! Нам нужно добраться до панели управления, чтобы отключить протокол безопасности"
-
-    show prof serious with move
-
-    prof serious "Агх, автоматические системы заблокированны, придется делать всё в ручную"
-
-    prof serious "Аля, помоги мне"
-    
-    aly normal "Да, сейчас!"
-
-    # ТУТ МИНИ ИГРА
-    with fade
-
-    'Андроид остановился, его глаза потухли.'
-    hide android
-
-    show aly scary with dissolve
-
-    aly "Профессор! Я так испугалась..."
-
-    prof alarm "Извини, Аля. Ты в порядке?"
-
-    aly thinking "Да, кажется, всё хорошо. Что это за место?"
-
-    prof serious "Пойдём, я всё объясню."
-
-    scene bg corridor with fade
-    'Они вышли из помещения, и дверь снова закрылась за ними. Они остановились у большого окна, из которого открывался вид на город.'
-    
-    show aly normal at left with dissolve
-
-    show prof normal at right with dissolve
-    
-    aly thinking "Профессор, это был... робот? Настоящий андроид?"
-
-    prof normal "Да. Ты попала в наш самый секретный отдел. Проект 'Искра' — это разработка искусственного интеллекта нового поколения."
-
-    aly happy "Невероятно! Он выглядит как человек! И говорит, и двигается..."
-
-    prof normal "Мы стремимся создать ИИ, способный не только выполнять команды, но и думать, учиться, чувствовать."
-
-    aly happy "Это потрясающе. Но почему такая секретность?"
-
-    prof serious "Проект очень важен и потенциально опасен, если попадёт не в те руки. Поэтому мы тщательно охраняем его."
-
-    aly confusion "Понимаю. Извините, что вошла без разрешения."
-
-    prof normal "Всё в порядке. Главное, что ты не пострадала. Но, пожалуйста, никому об этом не рассказывай."
-
-    aly normal "Обещаю. Ваш секрет — в надёжных руках."
-    
-    jump Chapter_7
     # Конец 6 главы
 
 
