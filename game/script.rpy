@@ -11,7 +11,202 @@ define franz = Character('Франц', color="#f631ba", image="franz")
 define vivi = Character('Вивиан', color="#26781c", image="vivi")
 define voice = Character('Голос из динамика', color="#aa1414")
 define android  = Character('Андроид', color="#14a1da")
+image successhack = Movie(play="images/successhack.webm", size=(1920,1080), loop=False, xalign=0.10, yalign=0.10)
 
+
+init python:
+    import random
+
+    # Список путей к изображениям фрагментов
+    fragment_images = [
+        "images/mg/correct_fragment_1.jpg",
+        "images/mg/correct_fragment_2.jpg",
+        "images/mg/correct_fragment_3.jpg",
+        "images/mg/correct_fragment_4.jpg",
+        "images/mg/wrong_fragment_1.jpg",
+        "images/mg/wrong_fragment_2.jpg",
+        "images/mg/wrong_fragment_3.jpg",
+        "images/mg/wrong_fragment_4.jpg",
+    ]
+
+    renpy.random.shuffle(fragment_images)
+
+    # Состояния фрагментов
+    for i in range(8):
+        globals()["fragment_selected_%d" % i] = False
+
+    # Функция для подсчета правильных фрагментов
+    def count_correct_fragments():
+        correct_count = 0
+        for i in range(4):  # Проверяем только первые 4 фрагмента (правильные)
+            if globals().get("fragment_selected_%d" % i, False):
+                correct_count += 1
+        return correct_count
+
+# Экран игры с кнопкой "Взлом"
+screen hacking_game:
+    modal True
+    window:
+        xalign 0.5
+        yalign 0.5
+        background "images/mg/bg fingerprint.jpg"
+        xsize 1920  # Размеры окна (фона)
+        ysize 1080
+
+    # Отображение фрагментов
+    vbox:
+        spacing 10  # Расстояние между фрагментами
+        xalign 0.3  # Перемещаем влево (меняем xalign)
+        yalign 0.5  # Центрируем по Y
+        grid 2 4:  # Создаём сетку с 2 колонками и 4 строками
+            for i, fragment_path in enumerate(fragment_images):  # Перебираем изображения
+                # Определяем выбранность фрагмента
+                $ fragment_selected = globals().get("fragment_selected_%d" % i, False)
+        
+                imagebutton:
+                    idle fragment_path  # Отображение изображения
+                    hover At(
+                        Composite(
+                            (77, 77),  # Размер (подгоните под ваше изображение)
+                            (0, 0), fragment_path,  # Слоями: базовое изображение
+                            (0, 0), Solid("#ffffff80"),  # Светло-белый прозрачный наложенный слой
+                        )
+                    )
+                    selected_idle At(
+                        Composite(
+                            (77, 77), 
+                            (0, 0), fragment_path,
+                            (0, 0), Solid("#ff808080"),  # Красноватый прозрачный слой
+                        )
+                    )
+                    selected_hover At(
+                        Composite(
+                            (77, 77), 
+                            (0, 0), fragment_path,
+                            (0, 0), Solid("#ff666680"),  # Более яркий красный прозрачный слой
+                        )
+                    )
+                    xsize 77  # Размер фрагмента (настройте под свои нужды)
+                    ysize 77
+                    action ToggleVariable("fragment_selected_%d" % i)  # Переключение состояния
+
+    # Кнопка "Взлом"
+    textbutton "Взлом":
+        xalign 0.95  # Положение кнопки по горизонтали
+        yalign 0.95  # Положение кнопки по вертикали
+        action Function(check_hacking)
+
+label hacking_game_success:
+    hide screen hacking_game
+    scene bg successhack
+    show successhack
+
+    "Фух, вроде получилось"
+
+    scene bg secret room with fade
+
+    show aly confusion at left
+
+    show android at center
+    
+    aly normal "У меня нет пропуска... Я была с Профессором, но он ушёл..."
+
+    show android:
+        xalign -0.4
+    with move
+
+    play sound "music/sounds/opendoor2.mp3"
+
+    'В этот момент дверь внезапно открылась, и в комнату вбежали сотрудники безопасности вместе с Профессором.'
+
+    show prof serious with dissolve
+
+    prof alarm "Аля, быстрее за мной! Нам нужно добраться до панели управления, чтобы отключить протокол безопасности"
+
+    show prof serious with move
+
+    prof serious "Агх, автоматические системы заблокированны, придется делать всё в ручную"
+
+    prof serious "Аля, помоги мне"
+    
+    aly normal "Да, сейчас!"
+    
+    with fade
+
+    'Андроид остановился, его глаза потухли.'
+    hide android with dissolve
+
+    show aly scary with dissolve
+
+    aly "Профессор! Я так испугалась..."
+
+    prof alarm "Извини, Аля. Ты в порядке?"
+
+    aly thinking "Да, кажется, всё хорошо. Что это за место?"
+
+    prof serious "Пойдём, я всё объясню."
+    stop music fadeout(1.0)
+
+    scene bg corridor with fade
+    play music "music/Office_Music.mp3" fadein(1.0)
+
+    'Они вышли из помещения, и дверь снова закрылась за ними. Они остановились у большого окна, из которого открывался вид на город.'
+    
+    show aly normal at left with dissolve
+
+    show prof normal at right with dissolve
+    
+    aly thinking "Профессор, это был... робот? Настоящий андроид?"
+
+    prof normal "Да. Ты попала в наш самый секретный отдел. Проект 'Искра' — это разработка искусственного интеллекта нового поколения."
+
+    aly happy "Невероятно! Он выглядит как человек! И говорит, и двигается..."
+
+    prof normal "Мы стремимся создать ИИ, способный не только выполнять команды, но и думать, учиться, чувствовать."
+
+    aly happy "Это потрясающе. Но почему такая секретность?"
+
+    prof serious "Проект очень важен и потенциально опасен, если попадёт не в те руки. Поэтому мы тщательно охраняем его."
+
+    aly confusion "Понимаю. Извините, что вошла без разрешения."
+
+    prof normal "Всё в порядке. Главное, что ты не пострадала. Но, пожалуйста, никому об этом не рассказывай."
+
+    aly normal "Обещаю. Ваш секрет — в надёжных руках."
+    
+    jump Chapter_7
+
+    
+
+label hacking_game_failure:
+    hide screen hacking_game
+    scene bg failedhack
+    "Неудачная попытка взлома. Хотите попробовать ещё раз?"
+    menu:
+        "Да":
+            jump start_hacking_game
+        "Нет":
+            return
+
+    
+
+# Функция для проверки взлома
+init python:
+    def check_hacking():
+        correct_count = count_correct_fragments()
+        if correct_count >= 3:
+            renpy.jump("hacking_game_success")
+        else:
+            renpy.jump("hacking_game_failure")
+
+label start_hacking_game:
+    show screen hacking_game
+    window hide  # Убираем окно с текстом
+    
+    $ renpy.pause(2)  # Пауза на 2 секунды, чтобы игрок ничего не видел
+    window show  # Показываем окно текста снова, если необходимо
+    
+    return
 
 
 init python:
@@ -261,48 +456,6 @@ label Chapter_3:
     aly happy "С удовольствием!"
 
     'Она начала играть.'
-
-    screen hacking_game:
-    # Основное изображение (фон) - заглушка
-        window:
-            xalign 0.5
-            yalign 0.5
-            background Solid("#00ff00")  # Зелёная заглушка для фона
-            xsize 1920  # Размеры окна (фона)
-            ysize 1080
-    
-    # Отображение фрагментов - заглушки
-        vbox:
-            spacing 10  # Расстояние между фрагментами
-            xalign 0.5  # Центрируем по X
-            yalign 0.5  # Центрируем по Y
-            grid 2 4:  # Создаём сетку с 2 колонками и 4 строками
-                for i in range(8):  # 8 плиток (по 2 колонки)
-                    # Определяем цвет в зависимости от выбранности
-                    $ fragment_color = "#ff0000" if not globals().get("fragment_selected_%d" % i, False) else "#ff9900"
-                    imagebutton:
-                        idle Solid(fragment_color)  # Цвет зависит от переменной
-                        hover Solid("#ffcccc")  # Светло-красный при наведении
-                        xsize 100  # Размер фрагмента
-                        ysize 50   # Размер фрагмента
-                        action ToggleVariable("fragment_selected_%d" % i)  # Переключение состояния выбранности плитки
-
-
-    init python:
-        framgents = [
-            {"image": "fragment1.png", "image_hover": "fragment1_hover.png"},
-            {"image": "fragment2.png", "image_hover": "fragment2_hover.png"},
-            {"image": "fragment3.png", "image_hover": "fragment3_hover.png"}
-        ]
-        for i in range(8):
-            globals()["fragment_selected_%d" % i] = False
-
-
-    ##label start_hacking_game:
-    ##   show screen hacking_game
-    ##    "тип игра что-то там, заглушечка должна отображаться"
-        
-
 
     scene bg officeworkplace with fade
     show vald normal at left
@@ -632,72 +785,9 @@ label Chapter_6:
 
     android "Пожалуйста, предъявите удостоверение личности для проверки."
 
-    aly normal "У меня нет пропуска... Я была с Профессором, но он ушёл..."
 
-    play sound "music/sounds/opendoor2.mp3"
+    jump start_hacking_game
 
-    'В этот момент дверь внезапно открылась, и в комнату вбежали сотрудники безопасности вместе с Профессором.'
-
-    show android:
-        xalign -0.4
-    with move
-    
-    show prof serious with dissolve
-
-    prof alarm "Аля, быстрее за мной! Нам нужно добраться до панели управления, чтобы отключить протокол безопасности"
-
-    show prof serious with move
-
-    prof serious "Агх, автоматические системы заблокированны, придется делать всё в ручную"
-
-    prof serious "Аля, помоги мне"
-    
-    aly normal "Да, сейчас!"
-
-    # ТУТ МИНИ ИГРА
-    with fade
-
-    'Андроид остановился, его глаза потухли.'
-    hide android with dissolve
-
-    show aly scary with dissolve
-
-    aly "Профессор! Я так испугалась..."
-
-    prof alarm "Извини, Аля. Ты в порядке?"
-
-    aly thinking "Да, кажется, всё хорошо. Что это за место?"
-
-    prof serious "Пойдём, я всё объясню."
-    stop music fadeout(1.0)
-
-    scene bg corridor with fade
-    play music "music/Office_Music.mp3" fadein(1.0)
-    'Они вышли из помещения, и дверь снова закрылась за ними. Они остановились у большого окна, из которого открывался вид на город.'
-    
-    show aly normal at left with dissolve
-
-    show prof normal at right with dissolve
-    
-    aly thinking "Профессор, это был... робот? Настоящий андроид?"
-
-    prof normal "Да. Ты попала в наш самый секретный отдел. Проект 'Искра' — это разработка искусственного интеллекта нового поколения."
-
-    aly happy "Невероятно! Он выглядит как человек! И говорит, и двигается..."
-
-    prof normal "Мы стремимся создать ИИ, способный не только выполнять команды, но и думать, учиться, чувствовать."
-
-    aly happy "Это потрясающе. Но почему такая секретность?"
-
-    prof serious "Проект очень важен и потенциально опасен, если попадёт не в те руки. Поэтому мы тщательно охраняем его."
-
-    aly confusion "Понимаю. Извините, что вошла без разрешения."
-
-    prof normal "Всё в порядке. Главное, что ты не пострадала. Но, пожалуйста, никому об этом не рассказывай."
-
-    aly normal "Обещаю. Ваш секрет — в надёжных руках."
-    
-    jump Chapter_7
     # Конец 6 главы
 
 
