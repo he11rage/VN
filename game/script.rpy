@@ -91,7 +91,11 @@ screen hacking_game:
                     action ToggleVariable("fragment_selected_%d" % i)  # Переключение состояния
 
     # Кнопка "Взлом"
-    textbutton "Взлом":
+    imagebutton:
+        idle "images/mg/hack_button.png"
+        hover At(
+        Transform("images/mg/hack_button.png", size=(110, 110), alpha=0.5)  # Полупрозрачный слой
+        )
         xalign 0.95  # Положение кнопки по горизонтали
         yalign 0.95  # Положение кнопки по вертикали
         action Function(check_hacking)
@@ -103,7 +107,7 @@ label hacking_game_success:
 
     "Фух, вроде получилось"
 
-    scene bg secret room with fade
+    scene bg server with fade
 
     show aly confusion at left
 
@@ -806,7 +810,7 @@ label Chapter_6:
 
     'Любопытство взяло верх, и она заглянула внутрь.'
 
-    scene bg secret room with fade
+    scene bg server with fade
     
     'В комнате стояли странные устройства: серверные стойки, мониторы с бегущими строками кода, мерцающие панели управления.' 
 
