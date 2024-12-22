@@ -235,7 +235,6 @@ label start:
 
     Алю пугает мутное будущее.  
     '''
-    jump credits 
 
     show aly scary at right with dissolve
 
