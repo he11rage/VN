@@ -223,6 +223,23 @@ init python:
 
 define flashbulb = Fade(0.2, 0.0, 0.8, color='#fff')
 
+
+
+label splashscreen:
+    scene black with dissolve
+    pause 1
+    show text "Студия Крутые перцы" with dissolve
+    pause 2
+    show text "Представляет" with dissolve
+    pause 2
+    show text "Учебный проект" with dissolve
+    pause 2 
+    show text "Визуальная новелла" with dissolve
+    pause 1
+    return
+
+
+
 # Игра начинается здесь:
 # # НАЧАЛО 1 ГЛАВЫ
 label start:
@@ -239,6 +256,7 @@ label start:
 
     Алю пугает мутное будущее.  
     '''
+    jump credits 
 
     show aly scary at right with dissolve
 
@@ -857,11 +875,12 @@ label Chapter_6:
 # Начало 7 главы
 label Chapter_7:
     # НЕ ЗНАЮ НУЖНО ЛИ ТУТ МЕНЯТЬ ИЗОБРАЖЕНИЕ, Т.К. ПО СУТИ ЕГО НАДО ВСТАВЛЯТЬ КОГДА АЛЯ И ПРОФ ВЫХОДЯТ В КОРИДОР
-    scene nightoffice with fade
+    scene bg nightoffice with fade
 
     'На улице уже стемнело. Профессор проводил Алю до выхода.'
 
-    show prof normal with dissolve
+    show prof normal at right
+    with dissolve 
 
     prof normal "Сегодня было много впечатлений. Надеюсь, ты не слишком испугалась." 
     show aly impressed with dissolve
@@ -874,7 +893,7 @@ label Chapter_7:
 
     prof normal "Всегда пожалуйста. Если решишь связать свою жизнь с IT, мы будем рады видеть тебя в нашей команде."
 
-    prof normal "Будут вопросы или захочешь глубже изучить что-то, обращайся"
+    prof normal "Будут вопросы или захочешь глубже изучить что-то, обращайся."
 
     aly normal "Я подумаю над этим. Сегодня я поняла, насколько это интересно и многогранно."
     # Конец 7 ГЛАВЫ
@@ -883,9 +902,9 @@ label Chapter_7:
     
 label Epilogue:
 
-    scene bg future with fade
+    scene black with fade
     
-    '''Спустя несколько месяцев Аля поступила в университет на факультет компьютерных наук.
+    n '''Спустя несколько месяцев Аля поступила в университет на факультет компьютерных наук.
     
     Она связалась с Профессором, и тот предложил ей стажировку в "Технограде". 
 
@@ -897,8 +916,19 @@ label Epilogue:
 
     Я готова к новым вызовам и открытиям. Мир IT — это именно то, что я искала.'''
 
-    'КОНЕЦ'
+    jump credits 
+  
+    return
+ 
+init:
+    transform txt_up:
+        yalign 1.5
+        linear 15.0 yalign -1.5
+
+label credits:
+    scene black with dissolve
+    show text "Тимлид - Максим Ярославцев {p}{p} Сценарий - Павел Беляев {p}{p} Дизайн - Михаил Будущев {p}{p} Код - Григорий Марков, Никита Гришунин {p}{p} Всем спасибо! {p}{p} Конец" at txt_up
+    pause 15
     stop music
 
     return
- 
