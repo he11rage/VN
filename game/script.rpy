@@ -12,7 +12,7 @@ define vivi = Character('Вивиан', color="#26781c", image="vivi")
 define voice = Character('Голос из динамика', color="#aa1414")
 define android  = Character('Андроид', color="#14a1da")
 image successhack = Movie(play="images/successhack.webm", size=(1920,1080), loop=False, xalign=0.10, yalign=0.10)
-
+image failurehack = Movie(play="images/failurehack.webm", size=(1920,1080), loop=False, xalign=0.10, yalign=0.10)
 
 init python:
     import random
@@ -105,37 +105,15 @@ label hacking_game_success:
     scene bg successhack
     show successhack
 
-    "Фух, вроде получилось"
+    aly "Получилось!!"
 
     scene bg server with fade
 
     show aly confusion at left
 
+    show prof normal at right
+
     show android at center
-    
-    aly normal "У меня нет пропуска... Я была с Профессором, но он ушёл..."
-
-    show android:
-        xalign -0.4
-    with move
-
-    play sound "music/sounds/opendoor2.mp3"
-
-    'В этот момент дверь внезапно открылась, и в комнату вбежали сотрудники безопасности вместе с Профессором.'
-
-    show prof serious with dissolve
-
-    prof alarm "Аля, быстрее за мной! Нам нужно добраться до панели управления, чтобы отключить протокол безопасности"
-
-    show prof serious with move
-
-    prof serious "Агх, автоматические системы заблокированны, придется делать всё в ручную"
-
-    prof serious "Аля, помоги мне"
-    
-    aly normal "Да, сейчас!"
-    
-    with fade
 
     'Андроид остановился, его глаза потухли.'
     hide android with dissolve
@@ -185,6 +163,7 @@ label hacking_game_success:
 label hacking_game_failure:
     hide screen hacking_game
     scene bg failedhack
+    show failurehack
     "Неудачная попытка взлома. Хотите попробовать ещё раз?"
     menu:
         "Да":
@@ -847,6 +826,26 @@ label Chapter_6:
     'Андроид начал приближаться к ней, его глаза светились холодным светом.'
 
     android "Пожалуйста, предъявите удостоверение личности для проверки."
+    
+    aly normal "У меня нет пропуска... Я была с Профессором, но он ушёл..."
+
+    show android at left with move
+
+    play sound "music/sounds/opendoor2.mp3"
+
+    'В этот момент дверь внезапно открылась, и в комнату вбежали сотрудники безопасности вместе с Профессором.'
+
+    show prof serious with dissolve
+
+    prof alarm "Аля, быстрее за мной! Нам нужно добраться до панели управления, чтобы отключить протокол безопасности"
+
+    show prof serious with move
+
+    prof serious "Агх, автоматические системы заблокированны, придется делать всё в ручную"
+
+    prof serious "Аля, помоги мне"
+    
+    aly normal "Да, сейчас!"
 
 
     jump start_hacking_game
