@@ -29,8 +29,7 @@ init python:
         "images/mg/wrong_fragment_4.jpg",
     ]
 
-
-
+    # Перемешиваем изображения
     # Состояния фрагментов
     for i in range(8):
         globals()["fragment_selected_%d" % i] = False
@@ -38,10 +37,13 @@ init python:
     # Функция для подсчета правильных фрагментов
     def count_correct_fragments():
         correct_count = 0
-        for i in range(4):  # Проверяем только первые 4 фрагмента (правильные)
-            if globals().get("fragment_selected_%d" % i, False):
-                correct_count += 1
+        for i, fragment in enumerate(fragment_images):
+            if fragment.startswith("images/mg/correct_fragment_"):  # Проверяем начало имени
+                if globals().get("fragment_selected_%d" % i, False):  # Проверяем, выбран ли фрагмент
+                    correct_count += 1
         return correct_count
+
+
 
 # Экран игры с кнопкой "Взлом"
 screen hacking_game:
@@ -177,12 +179,21 @@ label hacking_game_failure:
 init python:
     def check_hacking():
         correct_count = count_correct_fragments()
-        if correct_count >= 3:
+        if correct_count == 4:
             renpy.jump("hacking_game_success")
         else:
             renpy.jump("hacking_game_failure")
 
 label start_hacking_game:
+    # Перемешиваем фрагменты перед каждым запуском экрана
+    $ renpy.random.shuffle(fragment_images)
+    
+    # Сбрасываем все состояния фрагментов
+    $ i = 0
+    while i < 8:
+        $ globals()["fragment_selected_%d" % i] = False
+        $ i += 1
+
     show screen hacking_game
     window hide  # Убираем окно с текстом
     
