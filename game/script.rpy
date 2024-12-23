@@ -29,7 +29,7 @@ init python:
         "images/mg/wrong_fragment_4.jpg",
     ]
 
-    renpy.random.shuffle(fragment_images)
+
 
     # Состояния фрагментов
     for i in range(8):
