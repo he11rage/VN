@@ -171,9 +171,74 @@ label hacking_game_failure:
         "Да":
             jump start_hacking_game
         "Нет":
-            return
+            jump game_failure_continue
 
-    
+label game_failure_continue:
+    play music "music/Suspense_fail.mp3"
+    scene bg server
+
+    'Андроид активен и движется к выходу.'
+
+    show aly scary at right
+
+    aly scary "Профессор, что нам делать? Он выходит из-под контроля!"
+
+    show prof alarm at left
+
+    prof alarm "Я... Я не успеваю отключить его системы. Все команды заблокированы."
+
+    'Андроид, не реагируя на происходяшее, продолжает выполнять действия. Его механический голос звучит ровно'
+
+    show android at center with fade
+
+    show aly normal
+
+    android "Завершение активации. Протокол \"Исследование\" активирован."
+
+    aly scary "Что это значит? Что он будет делать?"
+
+    prof serious "Это значит, что он следует запрограммированным целям. И если мы не остановим его сейчас, последствия могут быть необратимыми..."
+
+    'Профессор резко хватается за голову, его голос дрожит.'
+
+    prof alarm "Я должен был предусмотреть это. Столько лет работы, и всё зря..."
+
+    aly scary "Мы что-то должны сделать! Это же ваша разработка, ваш проект!"
+
+    prof serious "Именно. И мой провал."
+
+    show aly normal
+
+    hide android with fade
+
+    'Андроид выходит за дверь лаборатории. Слышны сигналы тревоги.'
+    play sound "music/sounds/doorclosed2.mp3"
+
+    aly scary "Нет! Мы не можем просто стоять!"
+
+    'Профессор тихо шепчет, почти безжизненно.'
+
+    prof alarm "Аля, иногда мы не можем контролировать всё."
+
+    show prof serious
+
+    show aly normal
+
+    aly scary "Но вы ведь всегда говорили, что технология — это инструмент для улучшения жизни!"
+
+    aly scary "А сейчас мы позволяем этой машине угрожать всему, что вы построили!"
+
+    prof alarm "И мы понесём за это ответственность."
+
+    show prof normal
+
+    hide prof normal
+
+    hide aly normal
+
+    jump credits
+
+
 
 # Функция для проверки взлома
 init python:
@@ -433,7 +498,7 @@ label Chapter_2:
     jump choose_office
 
     label choose_office:
-        show bg corridor with fade
+        scene bg corridor with fade
         if offices:
             if len(offices) == 1:
                 $ office_name, office_label = offices.pop()
@@ -470,7 +535,8 @@ default offices = [
 label Chapter_3:
 
     scene bg officeworkplace with fade
-
+    play sound "music/sounds/opendoor2.mp3"
+    
     show prof normal at center
 
     show aly happy at right
@@ -529,7 +595,7 @@ label Chapter_3:
 
     aly happy "С удовольствием!"
 
-    'Она начала играть.'
+    'Она начала играть и сразу увлеклась процессом.'
 
     scene bg officeworkplace with fade
     show vald normal at left
@@ -559,9 +625,8 @@ label Chapter_3:
 
     aly happy "Ещё раз спасибо!"
 
-    scene bg corridor with fade
     # КОНЕЦ 3 ГЛАВЫ
-
+    play sound "music/sounds/doorclosed2.mp3"
     jump choose_office
 
 # НАЧАЛО 4 ГЛАВЫ
@@ -572,6 +637,8 @@ label Chapter_4:
     show prof normal at center with dissolve
 
     "Теперь познакомлю тебя с Францем. Он руководит отделом Fullstack-разработки."
+
+    play sound "music/sounds/opendoor2.mp3"
 
     scene bg fullstackoffice with fade
 
@@ -645,6 +712,10 @@ label Chapter_4:
 
     franz interested "Отлично! Ты быстро учишься. Видишь, как фронтенд и бэкенд работают вместе?"
 
+    franz interested "Попробуй изменить что-то в коде, чтобы увидеть результат сразу."
+
+    aly happy "Вау, это работает! Я сделала изменение, и всё обновилось!"
+
     aly happy "Да, спасибо большое! Это очень интересно."
 
     franz confident "Если хочешь развиваться в этом направлении, советую изучать алгоритмы, структуры данных, принципы объектно-ориентированного программирования. Также важно понимать архитектуру приложений и паттерны проектирования."
@@ -653,16 +724,15 @@ label Chapter_4:
 
     franz normal "Это хорошо. Программирование — это мощный инструмент творчества. Главное — не бояться сложностей."
 
-    scene bg corridor with fade 
+    play sound "music/sounds/doorclosed2.mp3"
     # КОНЕЦ 4 ГЛАВЫ
     jump choose_office
-
 
 # НАЧАЛО 5 ГЛАВЫ
 label Chapter_5:
     play music "music/Office_Music.mp3" fadein(1.0)
     'Далее они отправились в отдел, заполненный всевозможными растениями и цветами.'
-
+    play sound "music/sounds/opendoor2.mp3"
     scene bg qa with fade
     show aly happy at right with dissolve
     show prof normal at left with dissolve
@@ -727,7 +797,9 @@ label Chapter_5:
 
     vivi normal "Вот приложение, которое мы сейчас тестируем. Попробуй найти в нём недочёты."
     
-    'Аля начала работать с приложением, внимательно изучая его функции. Спустя некоторое время она заметила, что при определённых действиях приложение ведёт себя некорректно.'
+    'Аля начала работать с приложением, внимательно изучая его функции.'
+
+    'Спустя некоторое время она заметила, что при определённых действиях приложение ведёт себя некорректно.'
 
     scene bg qa with fade
 
@@ -748,14 +820,14 @@ label Chapter_5:
     vivi happy "Да, мы — своеобразный последний рубеж перед выпуском продукта. От нас зависит качество и репутация компании."
     stop music fadeout(1.0)
     # КОНЕЦ 5 ГЛАВЫ
-
-    scene bg corridor with fade 
+    play sound "music/sounds/doorclosed2.mp3"
     jump choose_office
     
 
 #НАЧАЛО 6 ГЛАВЫ
 label Chapter_6:
-    
+
+    play sound "music/sounds/doorclosed2.mp3"
     scene bg corridor with dissolve
     play music "music/Office_Music.mp3" fadein(1.0)
 
@@ -872,9 +944,10 @@ label Chapter_6:
     prof serious "Агх, автоматические системы заблокированны, придется делать всё в ручную"
 
     prof serious "Аля, помоги мне"
+
+    prof serious "Тебе нужно взломать панель управления, подбери правильные фрагменты отпечатка пальца."
     
     aly normal "Да, сейчас!"
-
 
     jump start_hacking_game
 
