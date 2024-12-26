@@ -658,7 +658,7 @@ label Chapter_4:
 
     aly confusion "Здравствуйте."
 
-    hide prof normal
+    hide prof normal with dissolve
 
     show aly normal at right with move
 
@@ -965,7 +965,7 @@ label Chapter_7:
     with dissolve 
 
     prof normal "Сегодня было много впечатлений. Надеюсь, ты не слишком испугалась." 
-    show aly impressed with dissolve
+    show aly normal with dissolve
 
     aly happy "Немного, но это было потрясающе! Я столько всего узнала. Теперь у меня гораздо более чёткое представление о разных профессиях в IT."
 
